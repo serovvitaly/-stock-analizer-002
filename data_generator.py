@@ -1,5 +1,6 @@
 import csv
 from collections import OrderedDict
+import tensorflow as tf
 
 
 class loader:
@@ -9,7 +10,7 @@ class loader:
         self.data = self.load_data_from_file(file_name)
 
 
-    def load_data(self, share_train=70, bars_on_chunk=10):
+    def load_data(self, share_train=70, bars_on_chunk=10, y_name='Species'):
         items = self.load_all_data(bars_on_chunk)
         train_slice_len = int(len(items[0]) * share_train / 100)
         train_x = items[0][0:train_slice_len]
