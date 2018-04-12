@@ -1,6 +1,7 @@
 import csv
 from collections import OrderedDict
 import tensorflow as tf
+import numpy as np
 
 
 class loader:
@@ -8,6 +9,20 @@ class loader:
    
     def __init__(self, file_name):
         self.data = self.load_data_from_file(file_name)
+
+
+    def get_tensorflow_dataset(self):
+        bars_on_chunk = 10
+        features = {}
+        for i in range(1, bars_on_chunk+1):
+            i = str(i)
+            features['open'+i] = np.array([6.4, 5.0])
+            features['high'+i] = np.array([6.4, 5.0])
+            features['low'+i] = np.array([6.4, 5.0])
+            features['close'+i] = np.array([6.4, 5.0])
+            features['vol'+i] = np.array([6.4, 5.0])
+        labels = np.array([2, 1])
+        return features, labels
 
 
     def load_data(self, share_train=70, bars_on_chunk=10, y_name='Species'):
